@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript exercise</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 90vh;
+            background-image: linear-gradient(315deg, white, lightblue);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .box {
+            box-shadow: 0 0 5px;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            padding: 1em;
+            padding-bottom: 3em;
+            position: relative;
+        }
+
+        ul li {
+            font-size: 1.25rem;
+            padding: .2em;
+        }
+
+        button {
+            font-size: inherit;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            width: calc(100% + 2em);
+            cursor: pointer;
+            position: absolute;
+            left: -1rem;
+            bottom: 0;
+            font-size: 1.15rem;
+            border: none;
+            color: white;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1 id="h1">your question</h1>
+        <ul>
+            <li>
+                <input type="radio" name="answer" id="a" class="answer">
+                <label for="a">number 1</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="b" class="answer">
+                <label for="a">number 2</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="c" class="answer">
+                <label for="a">number 3</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="d" class="answer">
+                <label for="a">number 4</label>
+            </li>
+        </ul>
+        <button id="submit">submit</button>
+    </div>
+
+    <script>
+        let score = 0;
+        const box = document.querySelector('.box');
+        const answers = document.querySelectorAll('.answer');
+        const a = document.querySelector('#a');
+        const b = document.querySelector('#b');
+        const c = document.querySelector('#c');
+        const d = document.querySelector('#d');
+        const btn = document.querySelector('#submit');
+        const heading = document.querySelector('#h1');
+        let counter = 0;
+        const quizData = [
+    {
+        question: "What is the most used programming language in 2019?",
+        a: "Java",
+        b: "C",
+        c: "Python",
+        d: "JavaScript",
+        correct: "d",
+    },
+    {
+        question: "Who is the President of US?",
+        a: "Florin Pop",
+        b: "Donald Trump",
+        c: "Ivan Saldano",
+        d: "Mihai Andrei",
+        correct: "b",
+    },
+    {
+        question: "What does HTML stand for?",
+        a: "Hypertext Markup Language",
+        b: "Cascading Style Sheet",
+        c: "Jason Object Notation",
+        d: "Helicopters Terminals Motorboats Lamborginis",
+        correct: "a",
+    },
+    {
+        question: "What year was JavaScript launched?",
+        a: "1996",
+        b: "1995",
+        c: "1994",
+        d: "none of the above",
+        correct: "b",
+    },
+];
+
+loadFile();
+    function loadFile(){
+        deselectQuestion();
+        heading.textContent = quizData[counter].question;
+        a.nextElementSibling.textContent = quizData[counter].a;
+        b.nextElementSibling.textContent = quizData[counter].b;
+        c.nextElementSibling.textContent = quizData[counter].c;
+        d.nextElementSibling.textContent = quizData[counter].d;
+    }
+
+    function getSelected(){
+
+        let submission = undefined;
+        answers.forEach(answer => {
+            if(answer.checked){
+                submission = answer.id;
+            }
+        });
+
+        return submission;
+    }
+
+    // deselect question
+
+    function deselectQuestion(){
+        answers.forEach(ele =>{
+            ele.checked = false;
+        })
+    }
+
+    // bring next question 
+    
+    btn.addEventListener('click', ()=>{
+        const answer = getSelected();
+        if(answer){
+            if(answer === quizData[counter].correct){
+                score++;
+                console.log(score);
+            }
+            counter++;
+            if(counter < quizData.length){
+            loadFile();
+            
+        }
+        else {
+            box.innerHTML = `<h1>you answered correctly ${score} out of ${quizData.length} questions<button onclick='location.reload()'>reload</button></h1>`;
+        }
+        }
+    });
+
+    
+    </script>
+</body>
+</html>
