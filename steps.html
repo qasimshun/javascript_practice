@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress steps</title>
+    <style>
+        button {
+            padding: .7em 1.5em;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+            background: blue;
+            color: white;
+            margin-top: 20px;
+        }
+        .box {
+            display: flex;
+            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid grey;
+            height: 200px;
+            box-shadow: 0 0 10px grey;
+        }
+
+        .two, .three, .four, .five {
+            z-index: 100;
+            position: relative;
+            text-align: center;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid black;
+            transition: all 350ms ease;
+        }
+
+        .box > div:last-child {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: grey;
+        }
+        .one > div {
+            width: 0%;
+            height: inherit;
+            background: blue;
+        }
+
+        .active {
+            border: 3px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="two">1</div>
+        <div class="two who">2</div>
+        <div class="two what">3</div>
+        <div class="two call">4</div>
+        <div class="one">
+            <div class="gg"></div>
+        </div>
+    </div>
+    <button class="prev">previous</button>
+    <button class="next">next</button>
+    <button class="reset">reset</button>
+    <script>
+
+        // all the required elements
+        const innerLine = document.querySelector('.gg');
+        const firstPoint = document.querySelectorAll('.two');
+        const previousBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const fifthLinePoint = document.querySelector('.one');
+        const anotherOne = Array.from(firstPoint);
+        const totalLine = fifthLinePoint.offsetWidth;
+        const firtDivLocation = firstPoint.offsetLeft;
+
+        console.log(firtDivLocation , totalLine, anotherOne);
+        const someone = document.querySelector('.what').offsetLeft;
+        const callit = document.querySelector('.call').offsetLeft;
+        const first = document.querySelector('.who').offsetLeft;
+        var something = 0;
+        const jupitor = someone - first;
+        const endit = callit - someone;
+        const erase = document.querySelector('.reset');
+
+        console.log(endit,first, jupitor, endit)
+
+        // functionalities 
+        function start(){
+                something++;
+                console.log(something)
+                if(something==2){
+                    innerLine.style.width = first + 'px';
+                }
+                else if(something==3){
+                    innerLine.style.width = (first + jupitor + 'px');
+                }
+                else if(something == 4){
+                    innerLine.style.width = (first +  jupitor + endit + 'px');
+                }
+                if(something >= anotherOne.length+1){
+                    something = 0;
+                }
+                update();
+        }
+
+
+        function reseting(){
+            innerLine.style.width =  0;
+            firstPoint.forEach(item=>{
+                item.classList.remove('active');
+            });
+        }
+
+        function previous(){
+            something--;
+            console.log(something)
+            if(something<=1){
+                innerLine.style.width = 0;
+            }
+            if(something==2){
+                    innerLine.style.width = first + 'px';
+                }
+                else if(something==3){
+                    innerLine.style.width = (first + jupitor + 'px');
+                }
+                else if(something == 4){
+                    innerLine.style.width = (first +  jupitor + endit + 'px');
+                }
+            if(something<=0){
+                something = 0;
+            }
+            update();
+        }
+
+        function update(){
+            firstPoint.forEach((item,idx)=>{
+                if(idx < something){
+                    item.classList.add('active');
+                }
+                else {
+                    item.classList.remove('active');
+                }
+            });
+            const circles = document.querySelectorAll('.active');
+
+
+        if(something ==1){
+            previousBtn.disabled = true;
+        }
+        else if(something == firstPoint.length){
+            nextBtn.disabled = true;
+        }
+        else {
+            previousBtn.disabled = false;
+            nextBtn.disabled = false;
+        }
+        }
+        
+
+        // event listeners 
+        nextBtn.addEventListener('click', start);
+        previousBtn.addEventListener('click', previous);
+        erase.addEventListener('click', reseting)
+    </script>
+</body>
+</html>
