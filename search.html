@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search widget</title>
+    <style>
+
+        body {
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+        input {
+            padding: .5em 1em;
+            font-size: 1.15rem;
+            width: 1rem;
+            transition: all 350ms ease-in-out;
+        }
+
+        .box {
+            position: relative;
+        }
+
+        .increase {
+            width: 200px;
+        }
+
+        button {
+            padding: .5em 1em;
+            border: none;
+            font-size: 1.15rem;
+            background-color: grey;
+            color: rgb(255, 255, 255);
+            z-index: 100;
+            position: absolute;
+            height: 42px;
+            left: 0;
+            transition: ease-in-out all 350ms;
+        }
+
+        .trnased {
+            transform: translateX(200%);
+            transform-origin: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="text" placeholder="do">
+        <button class="search">search</button>
+    </div>
+    <script>
+        const btn = document.querySelector('button');
+        const input = document.querySelector('input');
+
+        function doStuff(){
+            input.classList.toggle('increase');
+            btn.classList.toggle('trnased');
+        }
+
+        btn.addEventListener('click', doStuff);
+    </script>
+</body>
+</html>
