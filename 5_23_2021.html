@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>some exercises</title>
+    <style>
+        body {
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .big-box {
+            border: 2px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        div.active {
+            background: blue;
+            color: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 5px grey;
+        }
+
+        .big-box > * {
+            background: grey;
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .gg {
+            transform: rotateX(90deg);
+        }
+        /* Remove default bullets */
+ul, #myUL {
+  list-style-type: none;
+}
+
+/* Remove margins and padding from the parent ul */
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
+
+    </style>
+</head>
+<body>
+    <div class="big-box">
+        <div class="box">1</div>
+        <div class="box active">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+    </div>
+
+    <!--  nested lists  -->
+
+    <ul id="myUL">
+        <li><span class="caret">Beverages</span>
+          <ul class="nested">
+            <li>Water</li>
+            <li>Coffee</li>
+            <li><span class="caret">Tea</span>
+              <ul class="nested">
+                <li>Black Tea</li>
+                <li>White Tea</li>
+                <li><span class="caret">Green Tea</span>
+                  <ul class="nested">
+                    <li>Sencha</li>
+                    <li>Gyokuro</li>
+                    <li>Matcha</li>
+                    <li>Pi Lo Chun</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    <script>
+        
+        const divs = document.querySelectorAll('.box');
+        divs.forEach(item=>{
+            item.addEventListener('mouseleave',()=>{
+                item.classList.remove('active');
+            })
+            item.addEventListener('mouseenter',()=>{
+                item.classList.add('active')
+            })
+        });
+
+        var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+    </script>
+</body>
+</html>
