@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>video</title>
+    <style>
+        .speed-bar {
+            width: 30px;
+            
+            background: linear-gradient(to bottom, pink, blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <video src="054 Movies UI Layout.mp4" controls id="word"></video>
+    </div>
+    <div class="speed">
+        <div class="speed-bar">1x</div>
+    </div>
+    <script>
+        const word = document.querySelector('#word');
+        const another = document.querySelector('.speed');
+        const gg = document.querySelector('.speed-bar');
+
+        another.addEventListener('mousemove', function(e){
+            const something = e.pageY-this.offsetTop;
+            const cool = something / this.offsetHeight;
+            const min = 0.4;
+            const max = 4;
+            const height = Math.round(cool*100) + '%';
+            const playBackRate = cool *(max -min) + min;
+            gg.style.height = height;
+            gg.textContent = playBackRate.toFixed(2)+ 'x';
+            word.playBackRate = playBackRate;
+            console.log(something)
+        });
+    </script>
+</body>
+</html>
