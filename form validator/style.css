@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+form {
+    width: 400px;
+    box-shadow: 0 0 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form > * {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 75%;
+}
+
+.form-control > *:first-child {
+    margin-bottom: .5rem;
+}
+
+.form-control > input {
+    width: 100%;
+    font-size: 1.15rem;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid black;
+    transition: all 250ms ease;
+}
+
+.form-control > input:focus {
+    padding-bottom: 3px;
+    padding-left: 3px;
+}
+
+.form-control > button {
+    padding: 1rem 2.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: navy;
+    color: white;
+    border: none;
+    width: 100%;
+}
+
+input.error {
+    border-bottom: 2px solid red;
+}
+
+input.success {
+    border-bottom: 2px solid green;
+}
+
+
+#sumbit {
+    display: block;
+}
+
+
+
+.message {
+    border: 1px solid black;
+    margin-top: 3px;
+    padding: 2px;
+    background: rgba(76, 0, 130, 0.171);
+}
+
+
+
