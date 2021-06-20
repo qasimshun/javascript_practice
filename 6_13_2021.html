@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call it gg</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hadid {
+            list-style-type: none;
+            margin: 20px;
+            box-shadow: 0 0 10px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        .hadid > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .hadid h2 {
+            margin-top: 15px;
+        }
+
+        .hadid p {
+            margin-top: 5px;
+        }
+
+        .hadid button {
+            display: block;
+            padding: .5rem 1.5rem;
+            margin: 12px 0;
+            background: blue;
+            border: none;
+            color: white;
+            font-size: 1.15rem;
+            border-radius: 3px;
+        }
+
+        .hadid img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .wow {
+            border: 5px solid pink;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wow button {
+            font-size: 1.15rem;
+            padding: .4em 1em;
+            border: none;
+            border-radius: 3px;
+            background: blue;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+
+        class Product {
+            constructor (title,imgUrl,price,description){
+                this.title = title;
+                this.imgUrl = imgUrl;
+                this.price = price;
+                this.description = description;
+            }
+        }
+
+        class Component {
+            constructor (hook) {
+                this.hookedId = hook;
+            }
+
+            renderingNewMethod(tag, cssClass) {
+                const word = document.createElement(tag);
+                if(cssClass){
+                    word.className = cssClass;
+                }
+                document.getElementById(this.hookedId).append(word);
+                return word;
+            }
+        }
+
+        class SingleItem {
+            constructor (item){
+                this.item = item;
+            }
+
+            something() {
+                App.addProductToCart(this.item);
+            }
+
+            render(){
+                const me = document.createElement('li');
+                me.className = 'hadid';
+                    me.innerHTML = `<div>
+                        <img src='${this.item.imgUrl}'></img>
+                        <h2>${this.item.title}</h2>
+                        <p>${this.item.price}</p>
+                        <p>${this.item.description}</p>
+                        <button class='cart'>add to cart</button>
+                        </div>`;
+                    const cartBtn = me.querySelector('button');
+                    cartBtn.addEventListener('click',this.something.bind(this));
+                return me;
+            }
+        }
+
+        class ShoppingCart extends Component {
+            item = [];
+
+            constructor (hooking){
+                super(hooking);
+            }
+
+            set anotherStuff(value){
+                this.item = value;
+                this.having.innerHTML = `<h1>Total: \$${this.totalStuff}</h1>`;
+            }
+
+            get totalStuff(){
+                const sum = this.item.reduce((previousValue, currentValue)=> previousValue + currentValue.price,0);
+                return sum;
+            }
+
+            addItem(stuff){
+                const updateItems = [...this.item];
+                updateItems.push(stuff);
+                this.anotherStuff = updateItems;
+            }
+
+            render(){
+                const sec = this.renderingNewMethod('section','wow');
+                sec.innerHTML = `<h1>Total: \$${0}</h1>
+                <button>order now</button>
+                `;
+                this.having = sec.querySelector('h1');
+            }
+        }
+
+        class ProductList extends Component {
+            products = [
+                new Product('Pillow',
+                'https://www.sheratonstore.com/images/products/lrg/sheraton-feather-down-pillow-sh-108-f_lrg.jpg',
+                90,
+                'this is a comfortable pillow'),
+                new Product('car',
+                'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/is8rDPGsGlcg/v1/-1x-1.jpg',
+                89999,
+                'this car is so good')
+            ];
+            render(){
+                const another = document.createElement('ul');
+                another.className = 'gigi';
+                
+                for (const prod of this.products){
+                    const word = new SingleItem(prod);
+                    const person = word.render();
+                    another.append(person);
+                }
+                return another;
+            }
+        }
+
+        class Shop {
+            render(){
+                const word = document.getElementById('app');
+                this.cart = new ShoppingCart('app');
+                this.cart.render();
+                const twoProducts = new ProductList();
+                const prodRender = twoProducts.render();
+                word.append(prodRender);
+            }
+        }
+
+        class App {
+            static cart;
+            static init() {
+                const shop = new Shop();
+                shop.render();
+                this.cart = shop.cart;
+            }
+            static addProductToCart(stuff) {
+                this.cart.addItem(stuff);
+            }
+        }
+
+        App.init();
+    </script>
+</body>
+</html>
