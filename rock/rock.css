@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    background: darkblue;
+    padding-top: 50px;
+    min-height: 100vh;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.upper-heading {
+    border: 2px solid snow;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 400px;
+    max-width: 700px;
+}
+
+.score {
+    background: snow;
+    width: 76px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.select {
+    max-width: 700px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 100px;
+    position: relative;
+}
+
+.triangle {
+    position: absolute;
+}
+
+.Rock, .Paper, .Scissors {
+    z-index: 5;
+    transition: all .45ms ease;
+}
+
+.Rock:hover, .Paper:hover, .Scissors:hover {
+    transform: translate3d(0px, 8px, 0px);
+}
+
+.Scissors {
+    position: relative;
+    left: 130px;
+}
+
+.result {
+    min-width: 90vw;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    display: none;
+    margin-top: 100px;
+}
+
+.mid, .left, .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: snow;
+}
+
+.result img {
+    margin-top: 50px;
+}
+
+.mid > button {
+    padding: 10px 25px;
+    margin-top: 20px;
+    font-size: 100%;
+    transition: ease all .45ms;
+}
+
+.mid > button:hover {
+    transform: translate3d(0px, -2px, 0px);
+}
+
