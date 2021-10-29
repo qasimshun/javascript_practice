@@ -1,0 +1,115 @@
+.app {
+    background: darkblue;
+    color: white;
+    height: 100vh;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.top {
+    border-top: 2px solid white;
+    width: 100px;
+}
+
+.bottom {
+    border-top: 2px solid white;
+    width: 100px;
+    position: relative;
+    bottom: -250px;
+    left: 50px;
+}
+
+.middle-big {
+    border-left: 2px solid white;
+    height: 250px;
+}
+
+.middle-small {
+    border-left: 2px solid white;
+    height: 50px;
+    position: relative;
+    right: -100px;
+}
+
+.head {
+    width: 75px;
+    height: 75px;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: relative;
+    right: 40px;
+    bottom: -50px;
+}
+
+.body {
+    border-left: 2px solid white;
+    height: 75px;
+    position: relative;
+    top: 130px;
+    left: -80px;
+}
+
+.arm-one {
+    border-left: 2px solid white;
+    height: 50px;
+    transform: rotate(45deg);
+    top: 130px;
+    left: -100px;
+    position: relative;
+}
+
+.arm-two {
+    border-left: 2px solid white;
+    height: 50px;
+    transform: rotate(-45deg);
+    top: 130px;
+    left: -65px;
+    position: relative;
+}
+
+.leg-one {
+    border-left: 2px solid white;
+    height: 50px;
+    transform: rotate(45deg);
+    position: relative;
+    top: 197px;
+    left: -105px;
+}
+
+.leg-two {
+    border-left: 2px solid white;
+    height: 50px;
+    transform: rotate(-45deg);
+    position: relative;
+    top: 197px;
+    left: -70px;
+}
+
+.handle {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.gg {
+    padding: 10px;
+    color: white;
+}
+
+.wow {
+    margin: 5px;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+.pop-up {
+    display: none;
+}
