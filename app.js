@@ -1,86 +1,53 @@
-const word = document.querySelector('.word');
-const input = document.querySelector('.input');
-const score = document.querySelector('.scored');
-const time = document.querySelector('.timed');
-const reload = document.querySelector('.reload');
-const difficultied = document.querySelector('#difficulty');
-const start = document.querySelector('.start');
-const form = document.querySelector('form');
-console.log(form)
+const speechBtn = document.querySelector('.speech');
+const voiceSelect = document.querySelector('#select');
+const readBtn = document.querySelector('.read');
+const content = document.querySelector('#gg');
 
-const words = [
-    'hi',
-    'bye',
-    'gg',
-    'him'
-];
+speechBtn.addEventListener('click',e => {
+    e.target.previousElementSibling.classList.toggle('show');
+});
 
-let difficulty = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty'): 'medium';
+let voices = [];
 
-difficultied.value = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty'): 'medium';
-
-let randomWord;
-
-let scoring = 0;
-
-let timing = 10;
-
-input.focus();
-
-const timeInterval = setInterval(updateTime, 1000);
-
-function updateTime() {
-    timing--;
-    time.innerHTML = timing;
-    if(timing === 0){
-        clearInterval(timeInterval);
-        gameOver();
-    }
+// get voices 
+function getVocies() {
+    voices = speechSynthesis.getVoices();
+    voices.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.name;
+        option.innerHTML = `${item.name} ${item.lang}`
+        voiceSelect.appendChild(option)
+    })
 }
 
-function gameOver(){
-    reload.innerHTML = `
-    <h2>game has finished</h2>
-    <p>your score is ${scoring}</p>
-    <button onclick="location.reload()">reload</button>
-    `
-    reload.style.display = 'block';
-    start.style.display = 'none';
+getVocies()
+
+const message = new SpeechSynthesisUtterance();
+
+console.log(message)
+
+// set text of message 
+function setText(item){
+    message.text = item;
 }
 
-function randomPhrase() {
-    return words[Math.floor(Math.random()*words.length)];
+// set voices 
+function setvoices(e) {
+    message.voice = voices.find(voice => voice.name === e.target.value);
 }
 
-function addRandomWord() {
-    randomWord = randomPhrase();
-    word.innerHTML = randomWord;
+
+console.log(speechSynthesis)
+
+// speak things
+function speaked() {
+    speechSynthesis.speak(message);
 }
 
-function updateScore() {
-    scoring++;
-    score.innerHTML = scoring;
-}
+voiceSelect.addEventListener('change', setvoices);
 
-input.addEventListener('input', e => {
-    const phrase = e.target.value;
-    if(phrase === randomWord){
-        updateScore();
-        addRandomWord();
-        e.target.value = '';
-        if(difficulty === 'easy'){
-            timing += 4
-        }else if(difficulty === 'medium'){
-            timing += 2
-        }else if(difficulty === 'hard'){
-            timing += 1;
-        }
-    }
-})
+readBtn.addEventListener('click', () => {
+    setText(content.value);
+    speaked();
+});
 
-form.addEventListener('change', e => {
-    difficulty = e.target.value;
-    localStorage.setItem('difficulty',difficulty);
-})
-
-addRandomWord()

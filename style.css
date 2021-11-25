@@ -1,31 +1,10 @@
-.form {
-    background: black;
-    text-align: center;
-    padding: 1rem;
-}
-
-.game {
-    background: darkblue;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-}
-
-.time-score {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.time, .score {
-    margin: 1rem;
-}
-
-input {
-    font-size: 1.15rem;
-    padding: .3rem;
-}
-
-.reload {
+.modal {
     display: none;
+    position: fixed;
+    top: 20px;
+    background: darkorchid;
+}
+
+.modal.show {
+    display: block;
 }
